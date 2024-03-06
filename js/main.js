@@ -91,11 +91,13 @@ btnNext.addEventListener('click', function(){
 
 
 
+
 // BONUS 1
 
 const allThumbs = document.querySelectorAll('.my-thumbnail')
 
 allThumbs.forEach((elemento, indice)=>{
+    
     elemento.addEventListener('click', ()=> {
         myCarouselItem[counterImages].classList.remove('active');
         myThumbnail[counterImages].classList.remove('active');
@@ -107,8 +109,24 @@ allThumbs.forEach((elemento, indice)=>{
     })
 })
 
+// BONUS 2
 
+const autoPlay = () => {
+    myCarouselItem[counterImages].classList.remove('active');
+    myThumbnail[counterImages].classList.remove('active');
+    
+    counterImages++;
+    
+    if (counterImages > images.length-1){
+        counterImages = 0;
+    }
+    
+    myCarouselItem[counterImages].classList.add('active');
+    myThumbnail[counterImages].classList.add('active');
+    
+}
 
+let autoPlayLoop = setInterval (autoPlay, 3000);
 
 
 
