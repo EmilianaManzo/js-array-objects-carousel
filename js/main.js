@@ -28,4 +28,104 @@ const images = [
     },
 ];
 
-const myCarouselImages = 
+// RICHIAMO GLI ELEMENTI 
+
+const myCarouselImages = document.querySelector('.my-carousel-images');
+const myThumbnails = document.querySelector('.my-thumbnails');
+let counterImages = 0;
+
+// RESET ELEMENTI 
+myCarouselImages.innerHTML = '';
+myThumbnails.innerHTML = '';
+
+
+images.forEach((elemento,indice)=>{
+    myCarouselImages.innerHTML += `
+    <div class="my-carousel-item">
+    <img class="img-fluid" src="${elemento.url}" alt="${elemento.title}">
+    <div class="item-description px-3">
+    <h2>${elemento.title}</h2>
+    <p>${elemento.description}</p>
+    </div>
+    </div>
+    `;
+    myThumbnails.innerHTML += `
+    <div class="my-thumbnail">
+    <img class="img-fluid" src="${elemento.url}" alt="Thumbnail of ${elemento.title}picture">
+    </div>
+    `;
+})
+
+// RICHIAMO GLI ELEMENTI CREATI NEL CICLO FOREACH PRECENDENTE
+const myCarouselItem = document.getElementsByClassName('my-carousel-item');
+const myThumbnail = document.getElementsByClassName('my-thumbnail');
+
+// AGGIUNGO LA CLASSE ACTIVE AL PRIMO ELEMENTO 
+myCarouselItem[counterImages].classList.add('active');
+myThumbnail[counterImages].classList.add('active');
+
+
+// CREO I BOTTONI PREV E NEXT 
+myThumbnails.innerHTML += `
+<div class="my-previous position-absolute">
+    <span class="my-prev-hook"></span>
+</div>
+`;
+
+myThumbnails.innerHTML += `
+<div class="my-next position-absolute">
+    <span class="my-next-hook"></span>
+</div>
+`;
+
+const btnPrev = document.querySelector('.my-prev-hook');
+const btnNext = document.querySelector('.my-next-hook');
+
+btnPrev.addEventListener('click', function(){
+    prev();
+})
+
+btnNext.addEventListener('click', function(){
+    next();
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// FUNZIONI PER BOTTONI 
+function prev(){
+    myCarouselItem[counterImages].classList.remove('active');
+    myThumbnail[counterImages].classList.remove('active');
+
+    counterImages--;
+    
+    if (counterImages < 0){
+        counterImages = images.length-1;
+    }
+    myCarouselItem[counterImages].classList.add('active');
+    myThumbnail[counterImages].classList.add('active');
+}
+
+function next(){
+    myCarouselItem[counterImages].classList.remove('active');
+    myThumbnail[counterImages].classList.remove('active');
+    
+    counterImages++;
+
+    if (counterImages > images.length-1){
+        counterImages = 0;
+    }
+    myCarouselItem[counterImages].classList.add('active');
+    myThumbnail[counterImages].classList.add('active');
+    
+}
