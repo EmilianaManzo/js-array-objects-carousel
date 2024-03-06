@@ -91,8 +91,21 @@ btnNext.addEventListener('click', function(){
 
 
 
+// BONUS 1
 
+const allThumbs = document.querySelectorAll('.my-thumbnail')
 
+allThumbs.forEach((elemento, indice)=>{
+    elemento.addEventListener('click', ()=> {
+        myCarouselItem[counterImages].classList.remove('active');
+        myThumbnail[counterImages].classList.remove('active');
+
+        counterImages = indice;
+
+        myCarouselItem[counterImages].classList.add('active');
+        myThumbnail[counterImages].classList.add('active');
+    })
+})
 
 
 
@@ -119,7 +132,7 @@ function prev(){
 function next(){
     myCarouselItem[counterImages].classList.remove('active');
     myThumbnail[counterImages].classList.remove('active');
-    
+
     counterImages++;
 
     if (counterImages > images.length-1){
