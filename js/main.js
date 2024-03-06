@@ -109,26 +109,43 @@ allThumbs.forEach((elemento, indice)=>{
     })
 })
 
-// BONUS 2
-
+// BONUS 2 con parte del 3
+let flag = true;
 const autoPlay = () => {
-    myCarouselItem[counterImages].classList.remove('active');
-    myThumbnail[counterImages].classList.remove('active');
-    
-    counterImages++;
-    
-    if (counterImages > images.length-1){
-        counterImages = 0;
+    if (flag){
+        next();
+    }else if (!flag){
+        prev();
     }
-    
-    myCarouselItem[counterImages].classList.add('active');
-    myThumbnail[counterImages].classList.add('active');
     
 }
 
-let autoPlayLoop = setInterval (autoPlay, 3000);
 
 
+// BONUS 3
+const btnSS = document.getElementById('start-stop');
+const btninverti = document.getElementById('inverti');
+
+
+btnSS.addEventListener('click', function(){
+    if(flag){
+        setInterval(autoPlay,1000)
+    }else if(!flag){
+        clearInterval(autoPlay)
+    }
+    
+})
+
+btninverti.addEventListener('click', function(){
+    if(flag){
+        flag = false;
+        next();
+    }else{
+        flag = true;
+        prev();
+    }
+    
+})
 
 
 
